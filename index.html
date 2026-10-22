@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muutzin! Lactería</title>
+<meta name="description" content="Quesos, yogurts y gelatinas de yogurt 100% naturales, hechos en Morelia. Pide en línea para recoger en tienda o recibir a domicilio. Atención a mayoristas.">
+<meta property="og:title" content="Muutzin! Lactería">
+<meta property="og:description" content="Lácteos 100% naturales, de un ganado feliz. Pedidos en línea en Morelia, Mich.">
+<meta property="og:image" content="img/logo.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0270CB">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Nunito:wght@400;600;700;800&family=Amatic+SC:wght@700&display=swap">
+<style>
+/* Layout: un cielo de marca. Bandas a todo lo ancho (cielo claro, cielo profundo para mayoristas),
+   contenido en una columna de 1120px, nubes blancas como superficies. Tema único y deliberado (claro). */
+:root{
+  --sky-50:#F3F9FF;      /* fondo de página, Pantone 656-C aprox. */
+  --sky-100:#E3F1FF;
+  --sky-200:#B2DBFF;     /* color corporativo claro */
+  --sky-400:#50ACFF;     /* color corporativo medio */
+  --blue:#0270CB;        /* color corporativo principal */
+  --ink:#0B2F55;         /* texto */
+  --ink-soft:#43607F;
+  --cloud:#FFFFFF;
+  --cheese:#F29A2E;      /* acento: naranja de las etiquetas de queso */
+  --cheese-ink:#7A3F00;
+  --ok:#1F8A5B;
+  --line:#CFE4F7;
+  --font-display:"Montserrat","Gotham","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+  --font-hand:"Amatic SC","Chalkboard SE","Comic Sans MS",cursive;
+  --r-cloud:28px;
+  --shadow:0 10px 30px -12px rgba(2,112,203,.35);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0}
+[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--sky-50);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--cloud)}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+h1,h2,h3{font-family:var(--font-display);line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--cheese);outline-offset:2px;border-radius:8px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hand{font-family:var(--font-hand);font-weight:700;letter-spacing:.08em;font-size:1.45rem;line-height:1}
+.eyebrow{font-family:var(--font-hand);font-weight:700;font-size:1.6rem;letter-spacing:.06em;color:var(--blue)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;border:0;border-radius:999px;padding:.8em 1.4em;font-family:var(--font-display);font-weight:800;font-size:.95rem;cursor:pointer;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{background:#015FAD}
+.btn-cheese{background:var(--cheese);color:#3B1F00}
+.btn-cheese:hover{background:#E68A17}
+.btn-ghost{background:var(--cloud);color:var(--blue);border:2px solid var(--sky-200)}
+.btn-ghost:hover{border-color:var(--sky-400)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+
+/* Header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:40px;width:auto}
+.top nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink);font-weight:700;padding:.45em .8em;border-radius:999px}
+.top nav a:hover{background:var(--sky-100)}
+.cart-btn{position:relative;padding:.6em 1em}
+.cart-count{background:var(--cheese);color:#3B1F00;border-radius:999px;min-width:1.6em;height:1.6em;display:inline-grid;place-items:center;font-size:.8rem;padding:0 .35em;font-variant-numeric:tabular-nums}
+@media (max-width:760px){.top nav{display:none}.cart-btn{margin-left:auto}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--sky-400) 0%,#7CC0FF 55%,var(--sky-200) 100%);color:#fff}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center;padding-block:56px 84px}
+.hero h1{font-size:clamp(2.1rem,4.6vw,3.6rem);font-weight:900;letter-spacing:-.02em;color:#fff;text-shadow:0 3px 0 rgba(2,112,203,.55)}
+.hero .lead{font-size:1.15rem;max-width:34em;margin-top:16px;color:#F5FAFF}
+.hero .logo-big{width:min(380px,80%);margin-bottom:22px;filter:drop-shadow(0 4px 0 rgba(2,112,203,.55))}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero .ctas .btn-ghost{background:rgba(255,255,255,.95)}
+.hero .tag{display:inline-block;margin-top:22px;color:#fff;opacity:.95}
+.hero .cow{justify-self:center;width:min(360px,90%);position:relative}
+.hero .cow img{filter:drop-shadow(0 18px 0 rgba(255,255,255,.55))}
+.hero .grass{position:absolute;left:0;right:0;bottom:-1px;height:46px;background:var(--sky-50);border-radius:50% 50% 0 0/100% 100% 0 0;z-index:1}
+.cloud{position:absolute;z-index:0;opacity:.95;pointer-events:none;animation:drift 38s linear infinite alternate}
+.c1{top:8%;left:-40px;width:220px}
+.c2{bottom:60px;right:34%;width:150px;animation-duration:46s;opacity:.7}
+.c3{top:14%;right:-60px;width:340px;animation-duration:52s}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(40px)}}
+@media (max-width:760px){.hero .wrap{grid-template-columns:1fr;padding-block:36px 70px}.hero .cow{width:220px;order:-1}.c2{display:none}}
+
+/* Secciones */
+section.band{padding-block:72px}
+.sec-head{display:grid;gap:10px;margin-bottom:34px;max-width:46rem}
+.sec-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:900;letter-spacing:-.015em}
+.sec-head p{color:var(--ink-soft);font-size:1.08rem}
+
+/* Proyecto */
+.mv{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.mv article{background:var(--cloud);border-radius:var(--r-cloud);padding:28px;box-shadow:var(--shadow);display:grid;gap:10px;align-content:start}
+.mv h3{font-size:1.35rem;color:var(--blue)}
+.mv .kicker{font-family:var(--font-hand);font-size:1.5rem;color:var(--cheese-ink)}
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;position:relative}
+.chain li{list-style:none;padding:0 14px 0 0;display:grid;gap:6px;position:relative}
+.chain li::before{content:"";height:6px;border-radius:6px;background:var(--sky-200);margin-bottom:10px}
+.chain li:first-child::before{background:var(--sky-400)}
+.chain li:last-child::before{background:var(--blue)}
+.chain strong{font-family:var(--font-display);font-size:1.02rem}
+.chain span{color:var(--ink-soft);font-size:.95rem}
+.chain ol,.chain{padding:0;margin-block:40px 0}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.values div{border:2px solid var(--line);border-radius:20px;padding:18px 20px;background:var(--sky-50)}
+.values h4{margin:0 0 4px;font-family:var(--font-display);font-size:1rem;color:var(--blue);text-transform:uppercase;letter-spacing:.06em}
+.values p{color:var(--ink-soft);font-size:.95rem}
+@media (max-width:860px){.mv{grid-template-columns:1fr}.chain{grid-template-columns:1fr 1fr;row-gap:22px}.values{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.chain,.values{grid-template-columns:1fr}}
+
+/* Tienda */
+#tienda{background:var(--sky-100)}
+.shop-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:22px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:2px solid var(--sky-200);background:var(--cloud);border-radius:999px;padding:.45em 1em;font-weight:800;cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.price-note{font-size:.88rem;color:var(--ink-soft)}
+.cat-title{display:flex;align-items:baseline;gap:12px;margin:34px 0 14px;flex-wrap:wrap}
+.cat-title h3{font-size:1.5rem}
+.cat-title span{color:var(--ink-soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:16px}
+.card{background:var(--cloud);border-radius:var(--r-cloud);padding:18px;display:grid;grid-template-rows:auto auto 1fr auto auto;gap:10px;box-shadow:0 6px 18px -10px rgba(2,112,203,.35)}
+.card .pic{aspect-ratio:4/3;display:grid;place-items:center;background:radial-gradient(circle at 50% 60%,var(--sky-100),transparent 70%);border-radius:18px}
+.card .pic img{max-height:150px;width:auto;object-fit:contain;transition:transform .25s}
+.card:hover .pic img{transform:rotate(-2deg) scale(1.03)}
+.card h4{margin:0;font-family:var(--font-display);font-size:1.08rem}
+.card p{color:var(--ink-soft);font-size:.92rem}
+.sizes{display:flex;gap:6px;flex-wrap:wrap}
+.size{border:2px solid var(--line);background:var(--sky-50);border-radius:12px;padding:.3em .7em;font-weight:800;font-size:.85rem;cursor:pointer}
+.size[aria-pressed="true"]{border-color:var(--blue);background:var(--sky-100);color:var(--blue)}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font-family:var(--font-display);font-weight:900;font-size:1.35rem;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--font-body);font-weight:600;font-size:.75rem;color:var(--ink-soft);display:block}
+.add{padding:.65em 1.1em}
+.badge{display:inline-block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--cheese-ink);background:#FFE7C7;border-radius:999px;padding:.2em .6em;justify-self:start}
+
+/* Mayoristas */
+#mayoristas{background:var(--ink);color:#EAF4FF;position:relative;overflow:hidden}
+#mayoristas .eyebrow{color:var(--sky-200)}
+#mayoristas .sec-head p{color:#B9D3EE}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.seg article{background:#123C69;border:1px solid #1E5287;border-radius:24px;padding:22px;display:grid;gap:10px;align-content:start}
+.seg h3{font-size:1.15rem;color:#fff}
+.seg .for{font-family:var(--font-hand);font-size:1.4rem;color:var(--cheese)}
+.seg ul{margin:0;padding-left:1.1em;color:#C9DDF2;font-size:.94rem;display:grid;gap:4px}
+@media (max-width:980px){.seg{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.seg{grid-template-columns:1fr}}
+.wh-row{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;margin-top:40px;align-items:start}
+@media (max-width:900px){.wh-row{grid-template-columns:1fr}}
+.panel{background:#0F3762;border:1px solid #1E5287;border-radius:24px;padding:24px;min-width:0}
+.panel h3{font-size:1.2rem;color:#fff;margin-bottom:12px}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:14px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start;counter-increment:s}
+.steps li::before{content:counter(s);width:38px;height:38px;border-radius:50%;background:var(--sky-400);color:var(--ink);display:grid;place-items:center;font-family:var(--font-display);font-weight:900}
+.steps strong{color:#fff;display:block}
+.steps span{color:#B9D3EE;font-size:.93rem}
+.tbl-wrap{overflow-x:auto;margin-top:6px}
+table.tiers{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.93rem;min-width:420px}
+.tiers th,.tiers td{padding:.55em .6em;text-align:right;border-bottom:1px solid #1E5287}
+.tiers th:first-child,.tiers td:first-child{text-align:left}
+.tiers thead th{color:var(--sky-200);font-weight:800;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+.tiers td{color:#EAF4FF}
+.fine{font-size:.82rem;color:#9DBCDD;margin-top:10px}
+form.quote{display:grid;gap:12px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.f2{grid-template-columns:1fr}}
+label.fl{display:grid;gap:5px;font-weight:700;font-size:.9rem}
+.dark-in{background:#0B2F55;border:2px solid #2A5F95;border-radius:12px;padding:.6em .75em;color:#fff;width:100%}
+.dark-in::placeholder{color:#7FA3C8}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:inline-flex;gap:6px;align-items:center;background:#0B2F55;border:2px solid #2A5F95;border-radius:999px;padding:.3em .8em;font-size:.88rem;cursor:pointer}
+
+/* Próximamente */
+.soon{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.soon article{background:var(--cloud);border-radius:24px;padding:22px;border:2px dashed var(--sky-200);display:grid;gap:8px;align-content:start}
+.soon h3{font-size:1.1rem}
+.soon p{color:var(--ink-soft);font-size:.95rem}
+@media (max-width:820px){.soon{grid-template-columns:1fr}}
+
+/* Footer */
+footer{background:var(--blue);color:#EAF4FF}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:24px;padding-block:44px}
+footer img{height:54px;width:auto}
+footer h4{margin:0 0 8px;font-family:var(--font-display);color:#fff}
+footer p{color:#D6EAFF}
+footer .copy{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.25);padding-top:16px;font-size:.85rem;color:#CFE4FA}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
+
+/* Carrito y checkout */
+.scrim{position:fixed;inset:0;background:rgba(11,47,85,.45);z-index:80}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--cloud);z-index:90;display:grid;grid-template-rows:auto 1fr auto;box-shadow:-10px 0 40px rgba(11,47,85,.25);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.drawer header,.drawer .foot{padding:18px 20px;border-bottom:1px solid var(--line)}
+.drawer .foot{border-top:1px solid var(--line);border-bottom:0;display:grid;gap:12px}
+.drawer header{display:flex;align-items:center;justify-content:space-between}
+.drawer header h3{font-size:1.25rem}
+.x{background:var(--sky-100);border:0;border-radius:50%;width:38px;height:38px;font-size:1.3rem;cursor:pointer;color:var(--ink)}
+.lines{overflow:auto;padding:8px 20px;display:grid;align-content:start;gap:4px}
+.line{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.line img{width:56px;height:56px;object-fit:contain}
+.line .nm{font-weight:800;line-height:1.25}
+.line .sz{font-size:.85rem;color:var(--ink-soft)}
+.line .lt{font-family:var(--font-display);font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+.qty{display:inline-flex;align-items:center;border:2px solid var(--line);border-radius:999px;margin-top:6px}
+.qty button{border:0;background:none;width:30px;height:28px;cursor:pointer;font-weight:900;color:var(--blue)}
+.qty output{min-width:1.6em;text-align:center;font-weight:800;font-variant-numeric:tabular-nums}
+.sum{display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.sum div{display:flex;justify-content:space-between}
+.sum .tot{font-family:var(--font-display);font-weight:900;font-size:1.25rem}
+.empty{padding:40px 10px;text-align:center;color:var(--ink-soft);display:grid;gap:12px;justify-items:center}
+.empty img{width:120px;opacity:.85}
+
+.modal{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.sheet{background:var(--cloud);border-radius:28px;width:min(760px,100%);max-height:100%;overflow:auto;display:grid;grid-template-columns:1fr 280px;box-shadow:0 30px 80px rgba(11,47,85,.35)}
+@media (max-width:760px){.sheet{grid-template-columns:1fr}.sheet aside{order:-1}}
+.sheet main{padding:24px;min-width:0;display:grid;gap:18px;align-content:start}
+.sheet aside{background:var(--sky-50);padding:24px;border-left:1px solid var(--line);display:grid;gap:12px;align-content:start}
+.stepper{display:flex;gap:6px;flex-wrap:wrap}
+.stepper span{font-size:.8rem;font-weight:800;padding:.3em .75em;border-radius:999px;background:var(--sky-100);color:var(--ink-soft)}
+.stepper span.on{background:var(--blue);color:#fff}
+.stepper span.done{background:#D7F0E4;color:var(--ok)}
+.opt{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;border:2px solid var(--line);border-radius:18px;padding:14px 16px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--blue);background:var(--sky-50)}
+.opt input{margin-top:4px;accent-color:var(--blue);width:18px;height:18px}
+.opt strong{display:block;font-family:var(--font-display)}
+.opt small{color:var(--ink-soft);display:block;line-height:1.4;margin-top:2px}
+.opt .fee{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.light-in{background:var(--cloud);border:2px solid var(--line);border-radius:12px;padding:.6em .75em;width:100%}
+.light-in:focus{border-color:var(--sky-400);outline:none}
+.err{color:#B3261E;font-weight:700;font-size:.9rem}
+.nav-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.demo{background:#FFF3E0;border:2px solid #FFD8A8;border-radius:14px;padding:10px 14px;font-size:.88rem;color:var(--cheese-ink)}
+.summary-mini{display:grid;gap:6px;font-size:.9rem}
+.summary-mini div{display:flex;justify-content:space-between;gap:10px}
+.summary-mini .t{font-family:var(--font-display);font-weight:900;font-size:1.15rem;border-top:1px solid var(--line);padding-top:8px}
+pre.msg{white-space:pre-wrap;background:var(--sky-50);border:1px solid var(--line);border-radius:14px;padding:14px;font-size:.85rem;max-height:220px;overflow:auto;margin:0;font-family:ui-monospace,Menlo,Consolas,monospace}
+.okmark{width:56px;height:56px;border-radius:50%;background:#D7F0E4;color:var(--ok);display:grid;place-items:center;font-size:1.8rem;font-weight:900}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:.7em 1.2em;border-radius:999px;font-weight:700;z-index:120;box-shadow:var(--shadow)}
+.phone{font-weight:800;user-select:all}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Muutzin! inicio"><img src="img/logo.png" alt="Muutzin!"></a>
+    <nav aria-label="Secciones">
+      <a href="#proyecto">El proyecto</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#mayoristas">Mayoristas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <button class="btn btn-ghost cart-btn" id="openCart" aria-label="Ver carrito">Carrito <span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <img class="cloud c1" src="img/nube2.png" alt="">
+  <img class="cloud c2" src="img/nube1.png" alt="">
+  <img class="cloud c3" src="img/nube3.png" alt="">
+  <div class="wrap">
+    <div>
+      <img class="logo-big" src="img/logo-white.png" alt="Muutzin!">
+      <h1>Lácteos 100% naturales, de un ganado feliz.</h1>
+      <p class="lead">Quesos, yogurts y gelatinas de yogurt hechos en Morelia sin aditivos, con leche de pequeños productores locales y ganado cuidado con dignidad.</p>
+      <div class="ctas">
+        <a class="btn btn-cheese" href="#tienda">Hacer un pedido</a>
+        <a class="btn btn-ghost" href="#mayoristas">Soy negocio</a>
+      </div>
+      <span class="tag hand">Recoge en tienda o recibe en casa · Morelia, Mich.</span>
+    </div>
+    <div class="cow"><img src="img/vaquita.png" alt="Vaquita de Muutzin!"></div>
+  </div>
+  <div class="grass"></div>
+</section>
+
+<section class="band" id="proyecto">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">El proyecto</span>
+      <h2>Una lactería que cuida cada paso, del campo a la mesa</h2>
+      <p>Muutzin! nace para ofrecer lácteos de la más alta calidad sin aditivos, y para construir una cadena de valor sostenible, ética y transparente que beneficie a todos: productores, ganado, comercios y familias.</p>
+    </div>
+    <div class="mv">
+      <article>
+        <span class="kicker">Misión · Un ganado feliz</span>
+        <h3>Lácteos de la más alta calidad, hechos con respeto</h3>
+        <p>Elaboramos productos lácteos respetando y cuidando dignamente a nuestro ganado y apoyando a pequeños productores locales. Ofrecemos productos 100% naturales, sin aditivos, que garantizan seguridad e inocuidad para el consumo.</p>
+      </article>
+      <article>
+        <span class="kicker">Visión · Transformar la salud del consumidor</span>
+        <h3>Ser referencia en lácteos naturales y éticos</h3>
+        <p>Queremos ser reconocidos a nivel nacional e internacional por promover prácticas sostenibles y responsables, y ser la opción preferida de quienes buscan lácteos naturales, libres de aditivos, para el bienestar de sus familias.</p>
+      </article>
+    </div>
+    <ol class="chain" aria-label="Nuestra cadena de valor">
+      <li><strong>Pequeños productores</strong><span>Compramos leche a productores locales con un trato justo.</span></li>
+      <li><strong>Ganado bien cuidado</strong><span>Bienestar animal como condición para una buena leche.</span></li>
+      <li><strong>Elaboración sin aditivos</strong><span>Recetas sencillas: leche, cultivos, cuajo, sal y fruta.</span></li>
+      <li><strong>Tu mesa o tu negocio</strong><span>Venta directa en tienda, a domicilio y a mayoristas.</span></li>
+    </ol>
+    <div class="values">
+      <div><h4>Compromiso</h4><p>Lácteos de la más alta calidad, con naturalidad y seguridad para el consumidor.</p></div>
+      <div><h4>Calidad</h4><p>Cada producto se elabora con esmero, cuidando sabor y pureza.</p></div>
+      <div><h4>Confianza</h4><p>Productos libres de aditivos y transparencia en cada etapa.</p></div>
+      <div><h4>Dignidad</h4><p>Trato justo hacia los animales y hacia los productores.</p></div>
+      <div><h4>Respeto</h4><p>Cuidamos al ganado y apoyamos a pequeños productores de la comunidad.</p></div>
+      <div><h4>Responsabilidad</h4><p>Prácticas sostenibles con el medio ambiente y la sociedad.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="tienda">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Tienda en línea</span>
+      <h2>Arma tu pedido</h2>
+      <p>Elige tus productos y presentación, decide si recoges en tienda o lo enviamos a tu domicilio en Morelia, y paga como prefieras.</p>
+    </div>
+    <div class="shop-bar">
+      <div class="chips" role="group" aria-label="Filtrar productos">
+        <button class="chip" data-f="all" aria-pressed="true">Todo</button>
+        <button class="chip" data-f="quesos" aria-pressed="false">Quesos</button>
+        <button class="chip" data-f="yogurt" aria-pressed="false">Yogurt</button>
+        <button class="chip" data-f="gelatinas" aria-pressed="false">Gelatinas de yogurt</button>
+      </div>
+      <span class="price-note">Precios de lanzamiento en pesos mexicanos, IVA incluido.</span>
+    </div>
+    <div id="catalog"></div>
+  </div>
+</section>
+
+<section class="band" id="mayoristas">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Mayoristas y negocios</span>
+      <h2 style="color:#fff">Quesos hechos a la medida de tu cocina</h2>
+      <p>Cada negocio necesita un queso distinto: uno que funda y se estire en el horno, uno que aguante la plancha, uno que luzca en una tabla. Ajustamos receta, humedad, sal, maduración, corte y empaque a lo que tu menú necesita.</p>
+    </div>
+    <div class="seg">
+      <article>
+        <span class="for">Pizzerías</span>
+        <h3>Queso para pizza con buen fundido</h3>
+        <ul>
+          <li>Mezclas tipo mozzarella y manchego para gratinar</li>
+          <li>Humedad y grasa ajustadas para dorar sin soltar agua</li>
+          <li>Rallado o en barra, bolsas de 2 y 5 kg</li>
+        </ul>
+      </article>
+      <article>
+        <span class="for">Taquerías y fondas</span>
+        <h3>Quesos para plancha, comal y antojitos</h3>
+        <ul>
+          <li>Queso de hebra y asadero para quesadillas y gringas</li>
+          <li>Panela en tiras o cubos que no se deshace en la plancha</li>
+          <li>Añejo rallado para espolvorear</li>
+        </ul>
+      </article>
+      <article>
+        <span class="for">Alta gama</span>
+        <h3>Quesos de autor para restaurantes y tiendas gourmet</h3>
+        <ul>
+          <li>Añejos de maduración prolongada</li>
+          <li>Botaneros con chiles, hierbas o especias a pedido</li>
+          <li>Piezas para tablas y opción de etiqueta compartida</li>
+        </ul>
+      </article>
+      <article>
+        <span class="for">Cafeterías y hoteles</span>
+        <h3>Yogurt y postres para desayunos y bufé</h3>
+        <ul>
+          <li>Yogurt natural y de fruta en cubeta</li>
+          <li>Gelatinas de yogurt con suero de leche, en vaso individual</li>
+          <li>Entregas fijas por semana</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="wh-row">
+      <div class="panel">
+        <h3>Precio por volumen</h3>
+        <p style="color:#B9D3EE;font-size:.93rem">Precio sugerido por kilo según el volumen semanal que compres. Para desarrollos a la medida cotizamos aparte.</p>
+        <div class="tbl-wrap">
+          <table class="tiers" id="tiers">
+            <thead><tr><th>Queso (por kg)</th><th>Público</th><th>5–14 kg/sem</th><th>15–39 kg/sem</th><th>40+ kg/sem</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="fine">Descuentos de 8%, 12% y 15% sobre el precio público. Entrega sin costo en Morelia para pedidos mayoristas programados.</p>
+        <h3 style="margin-top:26px">Cómo trabajamos contigo</h3>
+        <ol class="steps">
+          <li><div><strong>Cuéntanos de tu negocio</strong><span>Qué platillos preparas, cuánto queso usas por semana y cómo lo cocinas.</span></div></li>
+          <li><div><strong>Prueba muestras</strong><span>Te llevamos muestras para probarlas en tu propia cocina.</span></div></li>
+          <li><div><strong>Ajustamos la receta</strong><span>Afinamos fundido, sal, textura, corte y empaque hasta que funcione en tu menú.</span></div></li>
+          <li><div><strong>Entregas programadas</strong><span>Fijamos precio, frecuencia y día de entrega. Factura disponible.</span></div></li>
+        </ol>
+      </div>
+      <div class="panel">
+        <h3>Solicita una cotización</h3>
+        <form class="quote" id="quoteForm" novalidate>
+          <label class="fl" for="q-tipo">Tipo de negocio
+            <select class="dark-in" id="q-tipo">
+              <option>Pizzería</option><option>Taquería o fonda</option><option>Restaurante / alta gama</option><option>Cafetería u hotel</option><option>Tienda o abarrotes</option><option>Otro</option>
+            </select>
+          </label>
+          <div class="f2">
+            <label class="fl" for="q-neg">Nombre del negocio<input class="dark-in" id="q-neg" placeholder="Pizzería La Lechuza"></label>
+            <label class="fl" for="q-nom">Tu nombre<input class="dark-in" id="q-nom" placeholder="Nombre y apellido"></label>
+          </div>
+          <div class="f2">
+            <label class="fl" for="q-tel">WhatsApp<input class="dark-in" id="q-tel" inputmode="tel" placeholder="443 000 0000"></label>
+            <label class="fl" for="q-vol">Volumen semanal (kg)<input class="dark-in" id="q-vol" inputmode="numeric" placeholder="20"></label>
+          </div>
+          <fieldset style="border:0;padding:0;margin:0;display:grid;gap:6px">
+            <legend class="fl" style="font-weight:700;font-size:.9rem;margin-bottom:6px">Productos de interés</legend>
+            <div class="checks">
+              <label><input type="checkbox" value="Queso para pizza"> Queso para pizza</label>
+              <label><input type="checkbox" value="Quesos para taquería"> Para taquería</label>
+              <label><input type="checkbox" value="Panela"> Panela</label>
+              <label><input type="checkbox" value="Manchego"> Manchego</label>
+              <label><input type="checkbox" value="Añejo"> Añejo</label>
+              <label><input type="checkbox" value="Quesos de alta gama"> Alta gama</label>
+              <label><input type="checkbox" value="Yogurt"> Yogurt</label>
+              <label><input type="checkbox" value="Gelatinas"> Gelatinas</label>
+            </div>
+          </fieldset>
+          <label class="fl" for="q-msg">¿Qué necesitas?<textarea class="dark-in" id="q-msg" rows="3" placeholder="Ej. queso que funda bien en horno de leña, entregas martes y viernes"></textarea></label>
+          <p class="err" id="q-err" hidden></p>
+          <button class="btn btn-cheese" type="submit">Preparar solicitud</button>
+          <div id="q-out" hidden style="display:grid;gap:10px">
+            <p style="color:#B9D3EE;font-size:.92rem">Envía este mensaje por WhatsApp al <span class="phone" style="color:#fff">443 328 0396</span> y te respondemos con muestras y precio.</p>
+            <pre class="msg" id="q-text" style="background:#0B2F55;border-color:#2A5F95;color:#EAF4FF"></pre>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn btn-ghost" type="button" id="q-copy">Copiar mensaje</button>
+              <a class="btn btn-primary" id="q-wa" target="_blank" rel="noopener">Abrir WhatsApp</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="pronto">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Muy pronto</span>
+      <h2>Más formas de pedir Muutzin!</h2>
+    </div>
+    <div class="soon">
+      <article><h3>Tienda en WhatsApp</h3><p>Nuestro catálogo completo dentro de WhatsApp: eliges, armas tu carrito y nos lo envías en un mensaje.</p></article>
+      <article><h3>App Muutzin!</h3><p>Pedidos repetidos con un toque, suscripción semanal de yogurt y seguimiento de tu entrega.</p></article>
+      <article><h3>Pago con tarjeta en línea</h3><p>Pago seguro con tarjeta de crédito o débito, transferencia SPEI y efectivo en tiendas de conveniencia.</p></article>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div style="display:grid;gap:12px;align-content:start">
+      <img src="img/logo-white.png" alt="Muutzin!">
+      <p>Lactería · Productos 100% naturales</p>
+    </div>
+    <div>
+      <h4>Visítanos</h4>
+      <p>Calle Vicente Riva Palacio #96<br>Colonia Centro, Morelia, Mich.<br>CP 58000</p>
+      <p style="margin-top:8px" id="hoursFoot"></p>
+    </div>
+    <div>
+      <h4>Pedidos y mayoreo</h4>
+      <p>Teléfono y WhatsApp<br><span class="phone">(443) 328 0396</span></p>
+    </div>
+    <p class="copy">© Muutzin! Lactería. Precios sujetos a cambio sin previo aviso.</p>
+  </div>
+</footer>
+
+<!-- Carrito -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Carrito">
+  <header><h3>Tu pedido</h3><button class="x" id="closeCart" aria-label="Cerrar carrito">×</button></header>
+  <div class="lines" id="lines"></div>
+  <div class="foot">
+    <div class="sum">
+      <div><span>Subtotal</span><span id="sub">$0</span></div>
+      <div style="color:var(--ink-soft);font-size:.88rem"><span>Envío a domicilio gratis desde</span><span id="freeFrom"></span></div>
+    </div>
+    <button class="btn btn-primary" id="toCheckout">Continuar con el pedido</button>
+  </div>
+</aside>
+
+<!-- Checkout -->
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="coTitle">
+  <div class="sheet">
+    <main id="coMain"></main>
+    <aside>
+      <h3 style="font-size:1.05rem">Resumen</h3>
+      <div class="summary-mini" id="coSum"></div>
+    </aside>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ===== Configuración de la tienda (editar aquí) ===== */
+const CONFIG = {
+  whatsapp: "524433280396",            // número para pedidos (formato internacional, sin +)
+  phoneLabel: "443 328 0396",
+  store: "Calle Vicente Riva Palacio #96, Col. Centro, Morelia",
+  hours: "Lunes a sábado, 9:00 a 19:00", // POR CONFIRMAR
+  deliveryFee: 45,                     // envío a domicilio en Morelia
+  freeDeliveryFrom: 600,               // envío gratis desde este subtotal
+  paymentLink: ""                      // pegar aquí el link de pago (Mercado Pago, Clip, Stripe) cuando exista
+};
+document.getElementById("hoursFoot").textContent = CONFIG.hours;
+
+/* ===== Catálogo y precios sugeridos (referencia regional −20%) ===== */
+const CATS = {
+  quesos:   {title:"Quesos", note:"Por pieza empacada al vacío"},
+  yogurt:   {title:"Yogurt", note:"Batido, sin aditivos"},
+  gelatinas:{title:"Gelatinas de yogurt con suero de leche", note:"Snack nutritivo: proteína láctea para quien entrena y para adultos mayores"}
+};
+const cheeseSizes = (kg)=>[
+  {id:"200g",label:"200 g",price:Math.round(kg*0.2)},
+  {id:"500g",label:"500 g",price:Math.round(kg*0.5)},
+  {id:"1kg", label:"1 kg", price:kg}
+];
+const yogSizes=[{id:"200g",label:"200 g",price:22},{id:"500g",label:"500 g",price:44},{id:"1l",label:"1 litro",price:76}];
+const gelSizes=[{id:"vaso",label:"Vaso individual",price:24}];
+const PRODUCTS = [
+  {id:"panela",cat:"quesos",name:"Queso Panela",img:"panela",kg:144,desc:"Fresco, suave y de sabor delicado. Solo, asado o en ensalada.",sizes:cheeseSizes(144)},
+  {id:"manchego",cat:"quesos",name:"Queso Manchego",img:"manchego",kg:192,desc:"Semiduro, de sabor suave y gran fundido. Ideal para quesadillas y gratinar.",sizes:cheeseSizes(192)},
+  {id:"anejo",cat:"quesos",name:"Queso Añejo",img:"anejo",kg:240,desc:"Seco, salado y de sabor intenso. Para desmoronar sobre enchiladas y antojitos.",sizes:cheeseSizes(240)},
+  {id:"panela-bot",cat:"quesos",name:"Panela Botanero",img:"panela-botanero",kg:168,badge:"Botanero",desc:"Panela con aceitunas verdes, jalapeños en rajas, pimiento morrón y chipotle.",sizes:cheeseSizes(168)},
+  {id:"manchego-bot",cat:"quesos",name:"Manchego Botanero",img:"manchego-botanero",kg:224,badge:"Botanero",desc:"Manchego con aceitunas verdes, jalapeños en rajas, pimiento morrón y chipotle.",sizes:cheeseSizes(224)},
+  {id:"yog-natural",cat:"yogurt",name:"Yogurt Natural",img:"yog-natural",desc:"Leche y cultivos, nada más. Para desayunar o cocinar.",sizes:yogSizes},
+  {id:"yog-fresa",cat:"yogurt",name:"Yogurt de Fresa",img:"yog-fresa",desc:"Yogurt batido con fresa.",sizes:yogSizes},
+  {id:"yog-zarzamora",cat:"yogurt",name:"Yogurt de Zarzamora",img:"yog-zarzamora",desc:"Yogurt batido con zarzamora.",sizes:yogSizes},
+  {id:"yog-mango",cat:"yogurt",name:"Yogurt de Mango",img:"yog-mango",desc:"Yogurt batido con mango.",sizes:yogSizes},
+  {id:"yog-pina",cat:"yogurt",name:"Yogurt de Piña-Coco",img:"yog-pina-coco",desc:"Yogurt batido con piña y coco.",sizes:yogSizes},
+  {id:"gel-natural",cat:"gelatinas",name:"Gelatina de Yogurt Natural",img:"gel-natural",desc:"Yogurt natural con suero de leche. Un snack nutritivo para después del gimnasio o a media tarde.",sizes:gelSizes},
+  {id:"gel-fresa",cat:"gelatinas",name:"Gelatina de Yogurt Fresa",img:"gel-fresa",desc:"Yogurt con fresa y suero de leche, rico en nutrientes.",sizes:gelSizes},
+  {id:"gel-zarzamora",cat:"gelatinas",name:"Gelatina de Yogurt Zarzamora",img:"gel-zarzamora",desc:"Yogurt con zarzamora y suero de leche, rico en nutrientes.",sizes:gelSizes},
+  {id:"gel-mango",cat:"gelatinas",name:"Gelatina de Yogurt Mango",img:"gel-mango",desc:"Yogurt con mango y suero de leche, rico en nutrientes.",sizes:gelSizes},
+  {id:"gel-pina",cat:"gelatinas",name:"Gelatina de Yogurt Piña-Coco",img:"gel-pina-coco",desc:"Yogurt con piña, coco y suero de leche, rico en nutrientes.",sizes:gelSizes}
+];
+const byId = Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
+const mxn = n => "$" + n.toLocaleString("es-MX",{maximumFractionDigits:0});
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ===== Estado ===== */
+let cart = [];       // {pid,size,qty}
+let filter = "all";
+const chosen = {};   // pid -> size id
+try{ cart = JSON.parse(localStorage.getItem("mz-cart")||"[]").filter(l=>byId[l.pid]); }catch(e){ cart=[]; }
+function save(){ try{ localStorage.setItem("mz-cart",JSON.stringify(cart)); }catch(e){} }
+const sizeOf = (p,sid)=>p.sizes.find(s=>s.id===sid)||p.sizes[0];
+const subtotal = ()=>cart.reduce((a,l)=>a+sizeOf(byId[l.pid],l.size).price*l.qty,0);
+const count = ()=>cart.reduce((a,l)=>a+l.qty,0);
+
+/* ===== Catálogo ===== */
+function renderCatalog(){
+  const host=$("#catalog"); let html="";
+  for(const [cid,c] of Object.entries(CATS)){
+    if(filter!=="all" && filter!==cid) continue;
+    html+=`<div class="cat-title"><h3>${c.title}</h3><span>${c.note}</span></div><div class="grid">`;
+    for(const p of PRODUCTS.filter(p=>p.cat===cid)){
+      const sid=chosen[p.id]||p.sizes[p.cat==="quesos"?1:0].id; chosen[p.id]=sid;
+      const s=sizeOf(p,sid);
+      html+=`<article class="card">
+        <div class="pic"><img src="img/${p.img}.png" alt="Etiqueta ${esc(p.name)}" loading="lazy"></div>
+        ${p.badge?`<span class="badge">${p.badge}</span>`:`<span></span>`}
+        <div style="display:grid;gap:6px;align-content:start"><h4>${esc(p.name)}</h4><p>${esc(p.desc)}</p></div>
+        <div class="sizes" role="group" aria-label="Presentación de ${esc(p.name)}">
+          ${p.sizes.map(z=>`<button class="size" data-p="${p.id}" data-s="${z.id}" aria-pressed="${z.id===sid}">${z.label}</button>`).join("")}
+        </div>
+        <div class="buy">
+          <div class="price">${mxn(s.price)}${p.kg?`<small>${mxn(p.kg)} por kg</small>`:`<small>${s.label}</small>`}</div>
+          <button class="btn btn-primary add" data-add="${p.id}">Agregar</button>
+        </div>
+      </article>`;
+    }
+    html+=`</div>`;
+  }
+  host.innerHTML=html;
+}
+$("#catalog").addEventListener("click",e=>{
+  const sz=e.target.closest(".size"); if(sz){ chosen[sz.dataset.p]=sz.dataset.s; renderCatalog(); return; }
+  const add=e.target.closest("[data-add]"); if(add){ addToCart(add.dataset.add, chosen[add.dataset.add]); }
+});
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
+  filter=b.dataset.f; document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b)); renderCatalog();
+}));
+
+/* ===== Carrito ===== */
+function addToCart(pid,size){
+  const l=cart.find(l=>l.pid===pid&&l.size===size);
+  if(l) l.qty++; else cart.push({pid,size,qty:1});
+  save(); renderCart();
+  const p=byId[pid]; toast(`${p.name} (${sizeOf(p,size).label}) agregado`);
+}
+function renderCart(){
+  $("#cartCount").textContent=count();
+  $("#sub").textContent=mxn(subtotal());
+  $("#freeFrom").textContent=mxn(CONFIG.freeDeliveryFrom);
+  $("#toCheckout").disabled=!cart.length;
+  const host=$("#lines");
+  if(!cart.length){ host.innerHTML=`<div class="empty"><img src="img/vaquita.png" alt=""><strong>Tu carrito está vacío</strong><span>Agrega quesos, yogurt o gelatinas desde la tienda.</span></div>`; return; }
+  host.innerHTML=cart.map((l,i)=>{const p=byId[l.pid],s=sizeOf(p,l.size);return `<div class="line">
+    <img src="img/${p.img}.png" alt="">
+    <div><div class="nm">${esc(p.name)}</div><div class="sz">${s.label} · ${mxn(s.price)} c/u</div>
+      <div class="qty"><button data-dec="${i}" aria-label="Quitar uno">−</button><output>${l.qty}</output><button data-inc="${i}" aria-label="Agregar uno">+</button></div></div>
+    <div class="lt">${mxn(s.price*l.qty)}</div></div>`}).join("");
+}
+$("#lines").addEventListener("click",e=>{
+  const d=e.target.closest("[data-dec]"),u=e.target.closest("[data-inc]");
+  if(d){const i=+d.dataset.dec; cart[i].qty--; if(cart[i].qty<=0) cart.splice(i,1);}
+  else if(u){cart[+u.dataset.inc].qty++;} else return;
+  save(); renderCart();
+});
+function openCart(){ $("#drawer").hidden=false; $("#scrim").hidden=false; $("#closeCart").focus(); }
+function closeCart(){ $("#drawer").hidden=true; $("#scrim").hidden=$("#modal").hidden; }
+$("#openCart").onclick=openCart; $("#closeCart").onclick=closeCart;
+$("#scrim").onclick=()=>{ closeCart(); closeModal(); };
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeCart(); closeModal(); } });
+
+/* ===== Checkout ===== */
+const order = {mode:"tienda",name:"",phone:"",email:"",street:"",colonia:"",ref:"",date:"",slot:"Mañana (9:00–13:00)",pay:CONFIG.paymentLink?"tarjeta":"spei",notes:""};
+let step = 0, orderId = "";
+const STEPS=["Entrega","Tus datos","Pago","Listo"];
+const fee=()=> order.mode==="domicilio" && subtotal()<CONFIG.freeDeliveryFrom ? CONFIG.deliveryFee : 0;
+function dates(){
+  const out=[]; const d=new Date();
+  for(let i=0;out.length<6;i++){ const x=new Date(d); x.setDate(d.getDate()+i+(d.getHours()>=17?1:0)); if(x.getDay()===0) continue;
+    out.push(x.toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"})); }
+  return out;
+}
+function renderSummary(){
+  const lines=cart.map(l=>{const p=byId[l.pid],s=sizeOf(p,l.size);return `<div><span>${l.qty} × ${esc(p.name)} ${s.label}</span><span>${mxn(s.price*l.qty)}</span></div>`}).join("");
+  $("#coSum").innerHTML=lines+`<div style="border-top:1px solid var(--line);padding-top:6px"><span>Subtotal</span><span>${mxn(subtotal())}</span></div>
+    <div><span>${order.mode==="domicilio"?"Envío a domicilio":"Recoger en tienda"}</span><span>${fee()?mxn(fee()):"Gratis"}</span></div>
+    <div class="t"><span>Total</span><span>${mxn(subtotal()+fee())}</span></div>`;
+}
+function stepper(){ return `<div class="stepper">${STEPS.map((s,i)=>`<span class="${i===step?"on":i<step?"done":""}">${i+1}. ${s}</span>`).join("")}</div>`; }
+function renderStep(){
+  const m=$("#coMain"); let h=stepper();
+  if(step===0){
+    const ds=dates(); if(!order.date) order.date=ds[0];
+    h+=`<h2 id="coTitle" style="font-size:1.5rem">¿Cómo quieres recibir tu pedido?</h2>
+    <label class="opt"><input type="radio" name="mode" value="tienda" ${order.mode==="tienda"?"checked":""}>
+      <span><strong>Recoger en tienda</strong><small>${CONFIG.store}<br>${CONFIG.hours}. Te avisamos por WhatsApp cuando esté listo.</small></span><span class="fee">Gratis</span></label>
+    <label class="opt"><input type="radio" name="mode" value="domicilio" ${order.mode==="domicilio"?"checked":""}>
+      <span><strong>Envío a domicilio</strong><small>Zona urbana de Morelia. Gratis en pedidos desde ${mxn(CONFIG.freeDeliveryFrom)}.</small></span><span class="fee">${subtotal()>=CONFIG.freeDeliveryFrom?"Gratis":mxn(CONFIG.deliveryFee)}</span></label>
+    <div id="addr" ${order.mode==="domicilio"?"":"hidden"} style="display:grid;gap:10px">
+      <label class="fl" for="o-street">Calle y número<input class="light-in" id="o-street" value="${esc(order.street)}" autocomplete="street-address"></label>
+      <div class="f2"><label class="fl" for="o-col">Colonia<input class="light-in" id="o-col" value="${esc(order.colonia)}"></label>
+      <label class="fl" for="o-ref">Referencias<input class="light-in" id="o-ref" value="${esc(order.ref)}" placeholder="Portón azul, junto a…"></label></div>
+    </div>
+    <div class="f2">
+      <label class="fl" for="o-date">${order.mode==="domicilio"?"Día de entrega":"Día para recoger"}<select class="light-in" id="o-date">${ds.map(d=>`<option ${d===order.date?"selected":""}>${d}</option>`).join("")}</select></label>
+      <label class="fl" for="o-slot">Horario<select class="light-in" id="o-slot">${["Mañana (9:00–13:00)","Tarde (15:00–19:00)"].map(s=>`<option ${s===order.slot?"selected":""}>${s}</option>`).join("")}</select></label>
+    </div>
+    <p class="err" id="o-err" hidden></p>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>Volver al carrito</button><button class="btn btn-primary" data-next>Continuar</button></div>`;
+  } else if(step===1){
+    h+=`<h2 id="coTitle" style="font-size:1.5rem">Tus datos de contacto</h2>
+    <label class="fl" for="o-name">Nombre completo<input class="light-in" id="o-name" value="${esc(order.name)}" autocomplete="name"></label>
+    <div class="f2"><label class="fl" for="o-phone">WhatsApp<input class="light-in" id="o-phone" value="${esc(order.phone)}" inputmode="tel" autocomplete="tel" placeholder="443 000 0000"></label>
+    <label class="fl" for="o-email">Correo (opcional)<input class="light-in" id="o-email" value="${esc(order.email)}" type="email" autocomplete="email"></label></div>
+    <label class="fl" for="o-notes">Notas del pedido (opcional)<textarea class="light-in" id="o-notes" rows="2" placeholder="Ej. el panela en dos piezas de 500 g">${esc(order.notes)}</textarea></label>
+    <p class="err" id="o-err" hidden></p>
+    <div class="nav-row"><button class="btn btn-ghost" data-prev>Atrás</button><button class="btn btn-primary" data-next>Continuar</button></div>`;
+  } else if(step===2){
+    const cash = order.mode==="domicilio" ? "Efectivo o tarjeta al recibir" : "Pagar en tienda";
+    h+=`<h2 id="coTitle" style="font-size:1.5rem">¿Cómo quieres pagar?</h2>
+    ${CONFIG.paymentLink?`<label class="opt"><input type="radio" name="pay" value="tarjeta" ${order.pay==="tarjeta"?"checked":""}><span><strong>Tarjeta de crédito o débito</strong><small>Pago seguro en línea. Al confirmar te enviamos al portal de pago.</small></span><span class="fee">En línea</span></label>`:""}
+    <label class="opt"><input type="radio" name="pay" value="spei" ${order.pay==="spei"?"checked":""}><span><strong>Transferencia SPEI</strong><small>Te enviamos la CLABE por WhatsApp. Preparamos tu pedido al recibir el pago.</small></span><span class="fee">Sin comisión</span></label>
+    <label class="opt"><input type="radio" name="pay" value="contra" ${order.pay==="contra"?"checked":""}><span><strong>${cash}</strong><small>${order.mode==="domicilio"?"El repartidor lleva terminal. Ten el monto exacto si pagas en efectivo.":"Efectivo o tarjeta en mostrador al recoger."}</small></span><span class="fee">Al entregar</span></label>
+    <div class="nav-row"><button class="btn btn-ghost" data-prev>Atrás</button><button class="btn btn-cheese" data-next>Confirmar pedido · ${mxn(subtotal()+fee())}</button></div>`;
+  } else {
+    const msg=orderMessage();
+    const payTxt = order.pay==="tarjeta" ? (CONFIG.paymentLink?`<a class="btn btn-primary" href="${CONFIG.paymentLink}" target="_blank" rel="noopener">Pagar ${mxn(subtotal()+fee())} con tarjeta</a>`:`<p class="demo">Aquí aparecerá el botón de pago con tarjeta en cuanto se conecte la pasarela de pago.</p>`)
+      : order.pay==="spei" ? `<p>Te enviaremos la CLABE por WhatsApp para transferir <strong>${mxn(subtotal()+fee())}</strong>.</p>` : `<p>Pagas <strong>${mxn(subtotal()+fee())}</strong> ${order.mode==="domicilio"?"al recibir":"al recoger en tienda"}.</p>`;
+    h+=`<div class="okmark">✓</div>
+    <h2 id="coTitle" style="font-size:1.5rem">Pedido ${orderId} listo para enviar</h2>
+    <p style="color:var(--ink-soft)">Envía este resumen por WhatsApp al <span class="phone">${CONFIG.phoneLabel}</span>. Te confirmamos disponibilidad y ${order.mode==="domicilio"?"hora de entrega":"cuándo pasar por él"}.</p>
+    <pre class="msg" id="o-msg">${esc(msg)}</pre>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn btn-primary" href="https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+      <button class="btn btn-ghost" data-copy>Copiar resumen</button>
+    </div>
+    ${payTxt}
+    <div class="nav-row"><button class="btn btn-ghost" data-done>Hacer otro pedido</button></div>`;
+  }
+  m.innerHTML=h; renderSummary();
+}
+function orderMessage(){
+  const L=cart.map(l=>{const p=byId[l.pid],s=sizeOf(p,l.size);return `• ${l.qty} × ${p.name} ${s.label} = ${mxn(s.price*l.qty)}`}).join("\n");
+  const pay={tarjeta:"Tarjeta en línea",spei:"Transferencia SPEI",contra:order.mode==="domicilio"?"Al recibir":"En tienda"}[order.pay];
+  return `¡Hola Muutzin! Quiero hacer este pedido (${orderId}):
+${L}
+Subtotal: ${mxn(subtotal())}
+${order.mode==="domicilio"?`Envío: ${fee()?mxn(fee()):"Gratis"}`:"Recoger en tienda"}
+TOTAL: ${mxn(subtotal()+fee())}
+
+Entrega: ${order.mode==="domicilio"?"A domicilio":"Recoger en tienda"} · ${order.date}, ${order.slot}
+${order.mode==="domicilio"?`Dirección: ${order.street}, Col. ${order.colonia}${order.ref?` (${order.ref})`:""}\n`:""}Pago: ${pay}
+Nombre: ${order.name}
+WhatsApp: ${order.phone}${order.email?`\nCorreo: ${order.email}`:""}${order.notes?`\nNotas: ${order.notes}`:""}`;
+}
+function grab(){
+  const v=id=>{const el=document.getElementById(id);return el?el.value.trim():undefined};
+  if(step===0){ const st=v("o-street"),co=v("o-col"),rf=v("o-ref"); if(st!==undefined){order.street=st;order.colonia=co;order.ref=rf;} order.date=v("o-date"); order.slot=v("o-slot"); }
+  if(step===1){ order.name=v("o-name"); order.phone=v("o-phone"); order.email=v("o-email"); order.notes=v("o-notes"); }
+}
+function fail(t){ const e=$("#o-err"); e.textContent=t; e.hidden=false; }
+$("#coMain").addEventListener("change",e=>{
+  if(e.target.name==="mode"){ grab(); order.mode=e.target.value; renderStep(); }
+  if(e.target.name==="pay"){ order.pay=e.target.value; }
+});
+$("#coMain").addEventListener("click",async e=>{
+  const t=e.target.closest("button,a"); if(!t) return;
+  if(t.hasAttribute("data-back")){ closeModal(); openCart(); }
+  if(t.hasAttribute("data-prev")){ grab(); step--; renderStep(); }
+  if(t.hasAttribute("data-next")){
+    grab();
+    if(step===0 && order.mode==="domicilio" && (!order.street||!order.colonia)) return fail("Escribe calle, número y colonia para poder entregarte.");
+    if(step===1){
+      if(!order.name) return fail("Escribe tu nombre para identificar el pedido.");
+      if(order.phone.replace(/\D/g,"").length<10) return fail("Escribe un WhatsApp de 10 dígitos para confirmarte el pedido.");
+    }
+    if(step===2){ const d=new Date(); orderId="MZ-"+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"-"+Math.floor(1000+Math.random()*9000); }
+    step++; renderStep(); $("#coMain").scrollTop=0;
+  }
+  if(t.hasAttribute("data-copy")) copyText(orderMessage(), $("#o-msg"));
+  if(t.hasAttribute("data-done")){ cart=[]; save(); renderCart(); closeModal(); toast("Listo. Puedes armar un nuevo pedido."); }
+});
+function openModal(){ step=0; closeCart(); $("#modal").hidden=false; $("#scrim").hidden=false; renderStep(); }
+function closeModal(){ $("#modal").hidden=true; $("#scrim").hidden=$("#drawer").hidden; }
+$("#toCheckout").onclick=openModal;
+$("#modal").addEventListener("click",e=>{ if(e.target.id==="modal") closeModal(); });
+
+/* ===== Utilidades ===== */
+let tt; function toast(t){ const el=$("#toast"); el.textContent=t; el.hidden=false; clearTimeout(tt); tt=setTimeout(()=>el.hidden=true,2200); }
+async function copyText(txt, node){
+  try{ await navigator.clipboard.writeText(txt); toast("Copiado"); }
+  catch(e){ if(node){ const r=document.createRange(); r.selectNodeContents(node); const s=getSelection(); s.removeAllRanges(); s.addRange(r); } toast("Selecciona el texto y cópialo"); }
+}
+
+/* ===== Mayoristas ===== */
+(function tiers(){
+  const rows=PRODUCTS.filter(p=>p.kg).map(p=>`<tr><td>${p.name.replace("Queso ","")}</td><td>${mxn(p.kg)}</td><td>${mxn(Math.round(p.kg*.92))}</td><td>${mxn(Math.round(p.kg*.88))}</td><td>${mxn(Math.round(p.kg*.85))}</td></tr>`).join("");
+  $("#tiers tbody").innerHTML=rows;
+})();
+$("#quoteForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const g=id=>document.getElementById(id).value.trim();
+  const items=[...document.querySelectorAll(".checks input:checked")].map(i=>i.value);
+  const err=$("#q-err");
+  if(!g("q-neg")||!g("q-nom")){ err.textContent="Escribe el nombre del negocio y tu nombre."; err.hidden=false; return; }
+  if(g("q-tel").replace(/\D/g,"").length<10){ err.textContent="Escribe un WhatsApp de 10 dígitos para enviarte la cotización."; err.hidden=false; return; }
+  err.hidden=true;
+  const msg=`¡Hola Muutzin! Quiero una cotización de mayoreo.
+Negocio: ${g("q-neg")} (${g("q-tipo")})
+Contacto: ${g("q-nom")} · ${g("q-tel")}
+Volumen semanal aprox.: ${g("q-vol")||"por definir"} kg
+Productos: ${items.join(", ")||"por definir"}
+${g("q-msg")?`Necesito: ${g("q-msg")}`:""}`.trim();
+  $("#q-text").textContent=msg;
+  $("#q-wa").href=`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+  $("#q-out").hidden=false;
+});
+$("#q-copy").onclick=()=>copyText($("#q-text").textContent,$("#q-text"));
+
+renderCatalog(); renderCart();
+</script>
+</body>
+</html>
